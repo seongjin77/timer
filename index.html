@@ -14,17 +14,21 @@
             </h1>
             <section class="timer-box">
                 <h2 class="timer">TIMER</h2>
-                <div>
-                    <label for="HRS">시</label>
-                    <input id="HRS" type="number" />
-
-                    <label for="MIN">분</label>
-                    <input id="MIN" type="number" />
-
-                    <label for="SEC">초</label>
-                    <input id="SEC" type="number" />
+                <div class="timer-cnt">
+                    <div>
+                        <label for="HRS">시</label>
+                        <input id="HRS" type="number" value="0" />
+                    </div>
+                    <div>
+                        <label for="MIN">분</label>
+                        <input id="MIN" type="number" value="0" />
+                    </div>
+                    <div>
+                        <label for="SEC">초</label>
+                        <input id="SEC" type="number" value="0" />
+                    </div>
                 </div>
-                <div>
+                <div class="btn">
                     <button class="start-btn">Start</button>
                     <button class="reset-btn">RESET</button>
                 </div>

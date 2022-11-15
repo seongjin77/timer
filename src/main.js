@@ -1,55 +1,44 @@
-const HRS = document.querySelector("#HRS");
-const MIN = document.querySelector("#MIN");
-const SEC = document.querySelector("#SEC");
+const HRS = document.querySelector("#HRS"); // 시 인풋
+const MIN = document.querySelector("#MIN"); // 분 인풋
+const SEC = document.querySelector("#SEC"); // 초 인풋
 const startBtn = document.querySelector(".start-btn");
 const resetBtn = document.querySelector(".reset-btn");
 
+//1. 클릭했을때 setinterval 함수 작동
+//2. 시 분 초를 총 초로 바꿔서 -1씩 줄어들게 하고 1초마다 새로 갱신된 초로 인풋창에 뿌려줌
 
+let prevention; // 변수를 밖으로 빼주어야 기억할 수 있음. 함수 안에 잇으면 실행되고 종료될때 사라짐
+startBtn.addEventListener("click", (e) => {
+    clearInterval(prevention);
+    prevention = setInterval(timer, 1000);
 
-function start(){
-    setInterval(timer,1000);
-    console.log('1');
-}
-
-startBtn.addEventListener("click", start);
+    
+});
 
 function timer() {
-    // input값의 시간을 가져온다
-    // 1초마다 반복하면서 input값의 벨류의 값을 줄여준다.
-    let hour = parseInt(HRS.value);
-    let min = parseInt(MIN.value);
-    let sec = parseInt(SEC.value);
+    let 시 = HRS.value !== "" || HRS.value <= 0 ? parseInt(HRS.value) * 60 * 60 : 0;
+    let 분 = MIN.value !== "" || MIN.value <= 0 ? parseInt(MIN.value) * 60 : 0;
+    let 초 = SEC.value !== "" || SEC.value <= 0 ? parseInt(SEC.value) : 0;
 
-    if (hour < 0) return alert("시간이 잘못됐습니다");
-    if (min < 0 && min > 60) return alert("분이 잘못됐습니다");
-    if (sec < 0 && sec > 60) return alert("초가 잘못됐습니다");
-
-    // 초의 범위를 패스하면
-    // 초의 시간이 1씩 마이너스 한다.
-    // 만약 초가 0이 될때, 분이 0보다 크다면 분을 -1 해주고 60을 채워라
-    // 분이 0일때, 시가 0보다 크다면 시를 -1 해주고 분에 60을 채워라
-
-    if (sec !== 0) {
-        sec--;
-    } else {
-        if (min !== 0) {
-            min--;
-            sec = 60;
-        }
-        else{
-            if(hour !== 0){
-                hour--
-                min = 60  
-            }
-            else{
-                alert('타임종료')
-            }
-        }
+    let time = 시 + 분 + 초;
+    
+    if(time === 0){
+        alert('입력을 해주세요')
+        clearInterval(prevention);
     }
+    else{
+        time--;
+        HRS.value =  Math.floor(time / 3600)
+        MIN.value = Math.floor(time / 60)
+        SEC.value = time % 60
+    }
+    
 
-    HRS.value = hour == undefined ? 0 : hour
-    MIN.value = min == undefined ? 0 : min
-    SEC.value = sec == undefined ? 0 : sec
 }
 
-
+resetBtn.addEventListener('click',()=>{
+    clearInterval(prevention);
+    HRS.value = 0
+    MIN.value = 0
+    SEC.value = 0
+})

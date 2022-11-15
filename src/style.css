@@ -30,6 +30,26 @@ label{
     color: white;
 }
 
+.timer-box{
+    width: 400px;
+    height: 360px;
+}
 input{
+    display: block;
+}
 
+.timer-cnt{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.timer-cnt input{
+    width: 50px;
+    
+}
+
+.btn {
+    margin-top: 30px;
+    text-align: center;
 }
